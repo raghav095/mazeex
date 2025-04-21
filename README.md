@@ -12,6 +12,8 @@ Welcome to the **Library App**! This project allows users to browse books, view 
 - 
 ![image](https://github.com/user-attachments/assets/872fb4e8-8e6a-45fa-9c53-7b595a3dfd21)
 
+![image](https://github.com/user-attachments/assets/8a5ba56c-318b-4257-9bea-07cac043cb3b)
+
 ### Technologies Used
 - **React.js** - Frontend framework for building the app.
 - **React Router** - For routing and navigation between pages.

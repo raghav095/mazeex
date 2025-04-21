@@ -21,7 +21,7 @@ function App() {
     <Router>
       <Navbar onSearch={onSearch} />
       <Routes>
-        <Route path="/" element={<Home books={books} />} />
+        <Route path="/" element={<Home searchResults={books} />} />
         <Route path="/about" element={<About />} />
         <Route path="/book/:id" element={<BookDetails />} />
       </Routes>

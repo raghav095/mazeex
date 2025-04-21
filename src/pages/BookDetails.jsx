@@ -13,8 +13,19 @@ const BookDetail = () => {
 
   if (!book) return <div className="text-center text-xl">Loading...</div>;
 
-  const { volumeInfo } = book;
-  const { title, authors, description, imageLinks, publisher, publishedDate, pageCount, categories, averageRating, ratingsCount, saleInfo } = volumeInfo;
+  const { volumeInfo, saleInfo } = book;
+  const {
+    title,
+    authors,
+    description,
+    imageLinks,
+    publisher,
+    publishedDate,
+    pageCount,
+    categories,
+    averageRating,
+    ratingsCount,
+  } = volumeInfo;
 
   return (
     <div className="container mx-auto p-6">
@@ -29,7 +40,7 @@ const BookDetail = () => {
         </div>
 
         {/* Book Information */}
-        <div className="lg:ml-8 mt-6 lg:mt-0">
+        <div className="lg:ml-8 mt-6 lg:mt-0 max-w-2xl">
           <h1 className="text-4xl font-semibold text-gray-800 mb-4">{title}</h1>
           {authors && <p className="text-lg text-gray-600 mb-2">by {authors.join(', ')}</p>}
           {publisher && <p className="text-lg text-gray-600 mb-2">Publisher: {publisher}</p>}
@@ -46,16 +57,19 @@ const BookDetail = () => {
 
           {/* Description */}
           {description && (
-            <p className="text-lg text-gray-800 mb-4">{description}</p>
+            <div
+              className="text-lg text-gray-800 mb-6"
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
           )}
 
           {/* Buy Button */}
-          {saleInfo?.buyLink && (
+          {saleInfo?.saleability === 'FOR_SALE' && saleInfo?.buyLink && (
             <a
               href={saleInfo.buyLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition duration-200"
+              className="inline-block mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition duration-200"
             >
               Buy Now
             </a>

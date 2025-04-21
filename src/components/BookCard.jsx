@@ -5,7 +5,7 @@ const BookCard = ({ book }) => {
   const { title, authors, imageLinks } = book.volumeInfo;
 
   return (
-    <div className="min-w-[160px] max-w-[160px] bg-white shadow rounded p-2 mr-4 hover:scale-105 transition">
+    <div className="min-w-[160px] max-w-[160px] bg-gray-300 shadow rounded p-2 mr-4 hover:scale-105 transition">
       <Link to={`/book/${book.id}`}>
         <img
           src={imageLinks?.thumbnail}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import SearchBar from '../components/SearchBar';
 import BookCarousel from '../components/BookCarousel';
 
+// Define the categories for the books.
 const categories = [
   { title: 'Best Sellers', query: 'bestseller' },
   { title: 'Science Fiction', query: 'science fiction' },
@@ -10,35 +10,48 @@ const categories = [
   { title: 'Romance', query: 'romantic novels' },
 ];
 
-const HomePage = () => {
+const HomePage = ({ searchResults }) => {
   const [booksByCategory, setBooksByCategory] = useState({});
-  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  // Fetch books for each category on component mount.
   useEffect(() => {
-    categories.forEach(async cat => {
-      const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${cat.query}`);
-      const data = await res.json();
-      setBooksByCategory(prev => ({ ...prev, [cat.title]: data.items || [] }));
-    });
-  }, []);
+    // Set the loading state to true while fetching the data
+    setLoading(true);
 
-  const handleSearch = async query => {
-    const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
-    const data = await res.json();
-    setSearchResults(data.items || []);
-  };
+    // Fetch data for each category
+    const fetchBooks = async () => {
+      const newBooksByCategory = {};
+
+      for (const cat of categories) {
+        const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${cat.query}`);
+        const data = await res.json();
+        newBooksByCategory[cat.title] = data.items || [];
+      }
+
+      // Once all categories are fetched, update the state and set loading to false
+      setBooksByCategory(newBooksByCategory);
+      setLoading(false);
+    };
+
+    fetchBooks();
+  }, []);
 
   return (
     <div className="p-6">
-      <SearchBar onSearch={handleSearch} />
-
-      {searchResults.length > 0 && (
+      {/* Search results section */}
+      {searchResults?.length > 0 && (
         <BookCarousel title="Search Results" books={searchResults} />
       )}
 
-      {categories.map(cat => (
-        <BookCarousel key={cat.title} title={cat.title} books={booksByCategory[cat.title] || []} />
-      ))}
+      {/* Categories section */}
+      {loading ? (
+        <p>Loading categories...</p>
+      ) : (
+        categories.map(cat => (
+          <BookCarousel key={cat.title} title={cat.title} books={booksByCategory[cat.title] || []} />
+        ))
+      )}
     </div>
   );
 };

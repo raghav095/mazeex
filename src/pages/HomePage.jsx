@@ -3,11 +3,12 @@ import BookCarousel from '../components/BookCarousel';
 
 // Define the categories for the books.
 const categories = [
+  { title: 'New Releases', query: 'new book releases' },
   { title: 'Best Sellers', query: 'bestseller' },
   { title: 'Science Fiction', query: 'science fiction' },
   { title: 'Mystery & Thriller', query: 'thriller' },
-  { title: 'New Releases', query: 'new book releases' },
   { title: 'Romance', query: 'romantic novels' },
+  { title: 'Crime', query: 'crime novels' },
 ];
 
 const HomePage = ({ searchResults }) => {

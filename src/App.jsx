@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/HomePage';
 import About from './pages/About';
 import BookDetails from './pages/BookDetails';
+import FavoritesPage from './pages/FavoritesPage';
 import axios from 'axios';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Navbar onSearch={onSearch} />
       <Routes>
         <Route path="/" element={<Home searchResults={books} />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/book/:id" element={<BookDetails />} />
       </Routes>

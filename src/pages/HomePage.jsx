@@ -1,25 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import BookCard from '../components/BookCard';
+import React, { useEffect, useState } from 'react';
+import SearchBar from '../components/SearchBar';
+import BookCarousel from '../components/BookCarousel';
 
-const Home = () => {
-  const [books, setBooks] = useState([]);
-  
+const categories = [
+  { title: 'Best Sellers', query: 'bestseller' },
+  { title: 'Science Fiction', query: 'science fiction' },
+  { title: 'Mystery & Thriller', query: 'thriller' },
+  { title: 'New Releases', query: 'new book releases' },
+  { title: 'Romance', query: 'romantic novels' },
+];
+
+const HomePage = () => {
+  const [booksByCategory, setBooksByCategory] = useState({});
+  const [searchResults, setSearchResults] = useState([]);
+
   useEffect(() => {
-    fetch('https://www.googleapis.com/books/v1/volumes?q=react')
-      .then(response => response.json())
-      .then(data => setBooks(data.items));
+    categories.forEach(async cat => {
+      const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${cat.query}`);
+      const data = await res.json();
+      setBooksByCategory(prev => ({ ...prev, [cat.title]: data.items || [] }));
+    });
   }, []);
 
+  const handleSearch = async query => {
+    const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+    const data = await res.json();
+    setSearchResults(data.items || []);
+  };
+
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Book Library</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {books.map(book => (
-          <BookCard key={book.id} book={book} />
-        ))}
-      </div>
+    <div className="p-6">
+      <SearchBar onSearch={handleSearch} />
+
+      {searchResults.length > 0 && (
+        <BookCarousel title="Search Results" books={searchResults} />
+      )}
+
+      {categories.map(cat => (
+        <BookCarousel key={cat.title} title={cat.title} books={booksByCategory[cat.title] || []} />
+      ))}
     </div>
   );
 };
 
-export default Home;
+export default HomePage;

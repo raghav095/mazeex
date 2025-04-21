@@ -1,12 +1,36 @@
-# React + Vite
+# Library App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the **Library App**! This project allows users to browse books, view their details, add books to their favorites list, and even purchase them directly through the Google Play Store app. The app fetches data from the **Google Books API** and provides a user-friendly interface for managing favorite books and completing purchases.
 
-Currently, two official plugins are available:
+## Features
+- **Browse books** using the Google Books API.
+- **View book details** including title, authors, publisher, and more.
+- **Add books to favorites** for future reference or purchase.
+- **View and manage favorites** in a dedicated page.
+- **Purchase books** directly from the Google Play Store.
+- **Mobile-responsive design** with a clean user interface.
+- 
+![image](https://github.com/user-attachments/assets/872fb4e8-8e6a-45fa-9c53-7b595a3dfd21)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Technologies Used
+- **React.js** - Frontend framework for building the app.
+- **React Router** - For routing and navigation between pages.
+- **Context API** - For managing the app state, particularly the favorites.
+- **Tailwind CSS** - For styling the application and ensuring responsiveness.
+- **Google Books API** - To fetch book data.
+- **React Hooks** - For managing state and lifecycle methods.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Installation Instructions
+
+To run this project locally on your machine, follow these steps:
+
+```bash
+git clone https://github.com/your-username/library-app.git
+
+npm install
+
+npm run dev
+
+

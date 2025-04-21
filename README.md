@@ -27,7 +27,7 @@ Welcome to the **Library App**! This project allows users to browse books, view 
 To run this project locally on your machine, follow these steps:
 
 ```bash
-git clone https://github.com/your-username/library-app.git
+git clone https://github.com/raghav095/mazeex.git
 
 npm install
 
